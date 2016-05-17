@@ -1,0 +1,18 @@
+name: ServerBackup
+main: Blubberboy333\ServerBackup\Main
+version: 1.0.0
+api: 2.0.0
+
+commands:
+    backup:
+        usage: /backup
+        description: Backs up all of the server's worlds
+        permission: backup.cmd
+permissions:
+    backup:
+        description: Allows the player to use all of the ServerBackup features
+        default: false
+        children:
+            backup.cmd:
+                default: op
+                description: Allows the player to use the Backup command
