@@ -32,28 +32,26 @@ class Main extends PluginBase{
                         $worldName = basename($a);
                         mkdir($backupDir."/".$worldName."/");
                         mkdir($backupDir."/".$worldName."/region");
-						copy($this->getServer()->getDataPath()."worlds/".$worldName."/level.dat", $backupDir."/".$worldName."/level.dat");
-						$files = scandir($this->getServer()->getDataPath()."worlds/".$worldName."/region");
-						foreach($files as $b){
-							$fileName = basename($b);
-							if(file_exists($this->getServer()->getDataPath()."worlds/".$worldName."/region/".$fileName)){
-								if(file_exists($this->getServer()->getDataPath()."worlds/".$worldName."/region/".$fileName)){
-									$old = $this->getServer()->getDataPath()."worlds/".$worldName."/region/".$fileName;
-									$new = $backupDir."/".$worldName."/region/".$fileName;
-									copy($old, $new);
-								}
-							}
-						}
-                    }
-                    $sender->sendMessage(TextFormat::GREEN."Done!");
-                    if($sender instanceof Player){
-                        $this->getLogger()->info(TextFormat::GREEN.$sender->getName()." backed up the server!");
-                    }
-                    return true;
-                }else{
-					$sender->sendMessage(TextFormat::YELLOW."The server has already been backed up today!");
-					return true;
+			copy($this->getServer()->getDataPath()."worlds/".$worldName."/level.dat", $backupDir."/".$worldName."/level.dat");
+			$files = scandir($this->getServer()->getDataPath()."worlds/".$worldName."/region");
+			foreach($files as $b){
+				$fileName = basename($b);
+				if(is_file($this->getServer()->getDataPath()."worlds/".$worldName."/region/".$fileName)){
+					$old = $this->getServer()->getDataPath()."worlds/".$worldName."/region/".$fileName;
+					$new = $backupDir."/".$worldName."/region/".$fileName;
+					copy($old, $new);
 				}
+			}
+                }
+                $sender->sendMessage(TextFormat::GREEN."Done!");
+                if($sender instanceof Player){
+                    $this->getLogger()->info(TextFormat::GREEN.$sender->getName()." backed up the server!");
+                }
+                return true;
+                }else{
+			$sender->sendMessage(TextFormat::YELLOW."The server has already been backed up today!");
+			return true;
+		}
             }
         }
     }
