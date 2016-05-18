@@ -51,20 +51,20 @@ class Main extends PluginBase{
     }
     
     public function backupServer($backupDir){
-		foreach(glob($this->getServer()->getDataPath()."worlds/*") as $a){
-			$worldName = basename($a);
-			mkdir($backupDir."/".$worldName."/");
-			mkdir($backupDir."/".$worldName."/region");
-			copy($this->getServer()->getDataPath()."worlds/".$worldName."/level.dat", $backupDir."/".$worldName."/level.dat");
-			$files = scandir($this->getServer()->getDataPath()."worlds/".$worldName."/region");
-			foreach($files as $b){
-				$fileName = basename($b);
-				if(is_file($this->getServer()->getDataPath()."worlds/".$worldName."/region/".$fileName)){
-					$old = $this->getServer()->getDataPath()."worlds/".$worldName."/region/".$fileName;
-					$new = $backupDir."/".$worldName."/region/".$fileName;
-					copy($old, $new);
-				}
-            }
-        }
+	foreach(glob($this->getServer()->getDataPath()."worlds/*") as $a){
+		$worldName = basename($a);
+		mkdir($backupDir."/".$worldName."/");
+		mkdir($backupDir."/".$worldName."/region");
+		copy($this->getServer()->getDataPath()."worlds/".$worldName."/level.dat", $backupDir."/".$worldName."/level.dat");
+		$files = scandir($this->getServer()->getDataPath()."worlds/".$worldName."/region");
+		foreach($files as $b){
+			$fileName = basename($b);
+			if(is_file($this->getServer()->getDataPath()."worlds/".$worldName."/region/".$fileName)){
+				$old = $this->getServer()->getDataPath()."worlds/".$worldName."/region/".$fileName;
+				$new = $backupDir."/".$worldName."/region/".$fileName;
+				copy($old, $new);
+			}
+		}
+	}
     }
 }
