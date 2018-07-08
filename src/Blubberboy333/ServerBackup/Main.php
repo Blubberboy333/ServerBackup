@@ -26,7 +26,7 @@ class Main extends PluginBase{
         $this->getLogger()->info(TextFormat::BLUE." Today's date is: ".$day.", ".$month." ".$date.", ".$year);
     }
     
-    public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args):bool {
         if(strtolower($command->getName()) == "backup"){
             if($sender->hasPermission("backup") || $sender->hasPermission("backup.cmd")){
                 $backupDir = $this->getDataFolder()."Backups/".date("M")."-".date("j")."-".date("Y");
